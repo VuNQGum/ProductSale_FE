@@ -146,6 +146,9 @@ export class AuthService {
         // Remove the access token from the local storage
         localStorage.removeItem('accessToken');
 
+        // Remove the access token from the local storage
+        localStorage.removeItem('refreshToken');
+
         // Set the authenticated flag to false
         this._authenticated = false;
 
