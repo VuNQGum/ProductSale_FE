@@ -1,0 +1,60 @@
+<div class="flex flex-col max-w-310 md:min-w-310 overflow-hidden max-h-screen -m-6">
+
+    <!-- Header -->
+    <div class="flex flex-0 items-center justify-between h-12 pr-3 sm:pr-5 pl-6 sm:pl-8 bg-primary text-on-primary">
+        <div class="text-lg font-medium head-modal">
+            <span>Chi tiết đào tạo dài hạn</span><i class="fa-regular fa-house"></i>
+        </div>
+        <button mat-icon-button [tabIndex]="-1" (click)="close()">
+            <i class="pi pi-times icon-size-5"></i>
+        </button>
+    </div>
+
+    <div #mainns class="flex flex-col flex-auto h-modal max-h-128 overflow-y-auto">
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-y-3 gap-x-8 w-full min-w-0 p-6 overflow-y-auto">
+            <div class="flex justify-center flex-col gap-1">
+                <label htmlFor="username">Mã phân loại<span class="font-bold text-red-500 text-lg">*</span> :</label>
+                <input class="w-full" pInputText id="username" [(ngModel)]="data.code" />
+            </div>
+
+            <div class="flex justify-center flex-col gap-1">
+                <label htmlFor="username">Tên phân loại<span class="font-bold text-red-500 text-lg">*</span> :</label>
+                <input class="w-full" pInputText id="username" [(ngModel)]="data.name" />
+            </div>
+
+            <div class="flex justify-center flex-col sm:col-span-2">
+                <label for="descript">Mô tả :</label>
+                <textarea class="max-h-none" id="descript" rows="4" pInputTextarea
+                    [(ngModel)]="data.descript"></textarea>
+            </div>
+            <div class="flex flex-col justify-center col-span-1">
+                <div class="mat-field-label">Phân loại cha :</div>
+                <p-treeSelect class="p-fluid" [style]="{ width: '100%'}" optionLabel="name" optionValue="id"
+                    name="truongdt" appendTo="body" [filter]="true" filterBy="name">
+                </p-treeSelect>
+            </div>
+            <div class="flex flex-col justify-center col-span-1">
+                <div class="mat-field-label">Trạng thái :</div>
+                <p-inputSwitch [(ngModel)]="data.isEnabled"></p-inputSwitch>
+            </div>
+            <div class="flex justify-center flex-col sm:col-span-2">
+                <label for="giatri">Thông số :</label>
+                <p-chips [ngModel]="keys" class="p-fluid" id="giatri" separator="," [separator]="separatorExp" allowDuplicate="false" (onAdd)="addChip($event)" (onRemove)="removeChip($event)"></p-chips>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="flex flex-0 items-center justify-end h-12 mr-2 pr-3 sm:pr-5 pl-6 sm:pl-8 mt-2 text-on-primary">
+        <div mat-dialog-actions class="h-toolbar flex justify-end pb-12">
+            <button class="mx-1 button-green" mat-flat-button (click)="saveAndClose()">
+                <i class="pi pi-check icon-size-5"></i>
+                <span class="ml-2">Cập nhật</span>
+            </button>
+            <button class="mx-1 button-red" mat-flat-button (click)="close()">
+                <i class="pi pi-times icon-size-5"></i>
+                <span class="ml-2">Đóng</span>
+            </button>
+        </div>
+    </div>
+</div>

@@ -35,13 +35,13 @@
 
                 <!-- Email field -->
                 <mat-form-field class="w-full">
-                    <mat-label>Email address</mat-label>
+                    <mat-label>User name</mat-label>
                     <input
                         id="email"
                         matInput
                         [formControlName]="'userId'">
                     <mat-error *ngIf="signInForm.get('userId').hasError('required')">
-                        Email address is required
+                        User name is required
                     </mat-error>
                     <!-- <mat-error *ngIf="signInForm.get('email').hasError('email')">
                         Please enter a valid email address
@@ -106,14 +106,14 @@
                 </button>
 
                 <!-- Separator -->
-                <div class="flex items-center mt-8">
+                <!-- <div class="flex items-center mt-8">
                     <div class="flex-auto mt-px border-t"></div>
                     <div class="mx-2 text-secondary">Or continue with</div>
                     <div class="flex-auto mt-px border-t"></div>
-                </div>
+                </div> -->
 
                 <!-- Single sign-on buttons -->
-                <div class="flex items-center mt-8 space-x-4">
+                <!-- <div class="flex items-center mt-8 space-x-4">
                     <button
                         class="flex-auto"
                         type="button"
@@ -138,7 +138,7 @@
                             class="icon-size-5"
                             [svgIcon]="'feather:github'"></mat-icon>
                     </button>
-                </div>
+                </div> -->
             </form>
         </div>
     </div>

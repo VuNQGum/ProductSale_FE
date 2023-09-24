@@ -1,0 +1,137 @@
+
+
+<div class="flex flex-col flex-auto min-w-0 overflow-auto">
+    <div class="flex-auto border-t -mt-px py-4 sm:pt-6s">
+        <div class="w-full max-w-screen-xl mx-auto px-2 sm:px-0">
+            <!-- Main -->
+            <div class="flex-auto w-panel">
+                <div class="flex justify-center mb-8 text-3xl font-bold">Danh sách sản phẩm đặc biệt</div>
+                <!-- Special products -->
+                <div class="w-full min-w-0 bg-card shadow rounded-2xl  pt-6 overflow-hidden mb-6">
+                    <p-carousel [value]="products" [numVisible]="3" [numScroll]="1"
+                        [responsiveOptions]="responsiveOptions">
+                        <ng-template let-product pTemplate="item">
+                            <div class="product-item mb-1 px-3">
+                                <p-card header="Tên sản phẩm" subheader="sfsdaf">
+                                    <ng-template pTemplate="header">
+                                        <img alt="Card" src="https://primefaces.org/cdn/primeng/images/demo/product/{{product.image}}" />
+                                    </ng-template>
+                                    <!-- <ng-template pTemplate="footer"> -->
+                                        <div class="flex flex-row items-center justify-between">
+                                            <p class="text-red-500 font-bold text-lg">999.999đ</p>
+                                            <p-button label="" icon="pi pi-cart-plus"></p-button>
+                                        </div>
+                                    <!-- </ng-template> -->
+                                </p-card>
+                            </div>
+                        </ng-template>
+                    </p-carousel>
+                </div>
+
+                <div class="flex justify-center mb-8 text-3xl font-bold">Danh sách sản phẩm</div>
+                <!-- List products -->
+                <div class="grid grid-cols-1 sm:grid-cols-5 gap-y-3 gap-x-8 w-full min-w-0 bg-card shadow rounded-2xl p-6 overflow-hidden">
+                    <p-card header="Tên sản phẩm" subheader="sfsdaf">
+                        <ng-template pTemplate="header">
+                            <img alt="Card" src="https://primefaces.org/cdn/primeng/images/demo/product/bamboo-watch.jpg" />
+                        </ng-template>
+                        <p>
+                            Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                            Short description
+                        </p>
+                        <ng-template pTemplate="footer">
+                            <div class="flex flex-row items-center justify-between">
+                                <p class="text-red-500 font-bold text-lg">999.999đ</p>
+                                <p-button label="" icon="pi pi-cart-plus"></p-button>
+                            </div>
+                        </ng-template>
+                    </p-card>
+
+                    <p-card header="Tên sản phẩm" subheader="sfsdaf">
+                        <ng-template pTemplate="header">
+                            <img alt="Card" src="https://primefaces.org/cdn/primeng/images/demo/product/bamboo-watch.jpg" />
+                        </ng-template>
+                        <p>
+                            Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                            Short description
+                        </p>
+                        <ng-template pTemplate="footer">
+                            <div class="flex flex-row items-center justify-between">
+                                <p class="text-red-500 font-bold text-lg">999.999đ</p>
+                                <p-button label="" icon="pi pi-cart-plus"></p-button>
+                            </div>
+                        </ng-template>
+                    </p-card>
+
+                    <p-card header="Tên sản phẩm" subheader="sfsdaf">
+                        <ng-template pTemplate="header">
+                            <img alt="Card" src="https://primefaces.org/cdn/primeng/images/demo/product/bamboo-watch.jpg" />
+                        </ng-template>
+                        <p>
+                            Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                            Short description
+                        </p>
+                        <ng-template pTemplate="footer">
+                            <div class="flex flex-row items-center justify-between">
+                                <p class="text-red-500 font-bold text-lg">999.999đ</p>
+                                <p-button label="" icon="pi pi-cart-plus"></p-button>
+                            </div>
+                        </ng-template>
+                    </p-card>
+
+                    <p-card header="Tên sản phẩm" subheader="sfsdaf">
+                        <ng-template pTemplate="header">
+                            <img alt="Card" src="https://primefaces.org/cdn/primeng/images/demo/product/bamboo-watch.jpg" />
+                        </ng-template>
+                        <p>
+                            Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                            Short description
+                        </p>
+                        <ng-template pTemplate="footer">
+                            <div class="flex flex-row items-center justify-between">
+                                <p class="text-red-500 font-bold text-lg">999.999đ</p>
+                                <p-button label="" icon="pi pi-cart-plus"></p-button>
+                            </div>
+                        </ng-template>
+                    </p-card>
+
+
+                    <p-card header="Tên sản phẩm" subheader="sfsdaf">
+                        <ng-template pTemplate="header">
+                            <img alt="Card" src="https://primefaces.org/cdn/primeng/images/demo/product/bamboo-watch.jpg" />
+                        </ng-template>
+                        <p>
+                            Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                            Short description
+                        </p>
+                        <ng-template pTemplate="footer">
+                            <div class="flex flex-row items-center justify-between">
+                                <p class="text-red-500 font-bold text-lg">999.999đ</p>
+                                <p-button label="" icon="pi pi-cart-plus"></p-button>
+                            </div>
+                        </ng-template>
+                    </p-card>
+
+
+                    <p-card header="Tên sản phẩm" subheader="sfsdaf">
+                        <ng-template pTemplate="header">
+                            <img alt="Card" src="https://primefaces.org/cdn/primeng/images/demo/product/bamboo-watch.jpg" />
+                        </ng-template>
+                        <p>
+                            Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                            Short description
+                        </p>
+                        <ng-template pTemplate="footer">
+                            <div class="flex flex-row items-center justify-between">
+                                <p class="text-red-500 font-bold text-lg">999.999đ</p>
+                                <p-button label="" icon="pi pi-cart-plus"></p-button>
+                            </div>
+                        </ng-template>
+                    </p-card>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- <p-fileUpload customUpload="true" mode="basic" chooseLabel="Choose" name="demo[]" accept="image/*" maxFileSize="1000000" (uploadHandler)="onUpload($event)"></p-fileUpload> -->

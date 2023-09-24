@@ -1,0 +1,132 @@
+<div class="flex flex-col max-w-310 md:min-w-310 overflow-hidden max-h-screen -m-6">
+
+    <!-- Header -->
+    <div class="flex flex-0 items-center justify-between h-12 pr-3 sm:pr-5 pl-6 sm:pl-8 bg-primary text-on-primary">
+        <div class="text-lg font-medium head-modal">
+            <span>Chi tiết đào tạo dài hạn</span><i class="fa-regular fa-house"></i>
+        </div>
+        <button mat-icon-button [tabIndex]="-1" (click)="close()">
+            <i class="pi pi-times icon-size-5"></i>
+        </button>
+    </div>
+
+    <div #mainns class="flex flex-col flex-auto h-modal max-h-128 overflow-y-auto">
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-y-3 gap-x-8 w-full min-w-0 p-6 overflow-y-auto">
+            <div class="flex justify-center flex-col gap-1">
+                <label htmlFor="username">Mã sản phẩm<span class="font-bold text-red-500 text-lg">*</span> :</label>
+                <input class="w-full" pInputText id="username" [(ngModel)]="data.code" />
+            </div>
+
+            <div class="flex justify-center flex-col gap-1">
+                <label htmlFor="username">Tên sản phẩm<span class="font-bold text-red-500 text-lg">*</span> :</label>
+                <input class="w-full" pInputText id="username" [(ngModel)]="data.name" />
+            </div>
+
+            <div class="flex justify-center flex-col gap-1 sm:col-span-2">
+                <label htmlFor="username">Mô tả ngắn :</label>
+                <input class="w-full" pInputText id="username" [(ngModel)]="data.shortDescript" />
+            </div>
+
+            <div class="flex justify-center flex-col sm:col-span-2">
+                <label for="descript">Mô tả :</label>
+                <textarea class="max-h-none" id="descript" rows="4" pInputTextarea [(ngModel)]="data.descript"></textarea>
+            </div>
+            <div class="flex justify-center flex-col sm:col-span-2">
+                <label for="giatri">Thông số :</label>
+                <p-chips class="p-fluid" id="thongso" separator="," [separator]="separatorExp"></p-chips>
+                <p-chips class="p-fluid" id="giatri" separator="," [separator]="separatorExp"></p-chips>
+            </div>
+
+            <div class="flex flex-col justify-center col-span-1">
+                <div class="mat-field-label">Phân loại<span class="font-bold text-red-500 text-lg">*</span> :</div>
+                <p-dropdown panelStyleClass="max-w-full" [style]="{ width: '100%'}" optionLabel="name" optionValue="id"
+                    name="truongdt" appendTo="body" [filter]="true" filterBy="name">
+                </p-dropdown>
+            </div>
+
+            <div class="flex flex-col justify-center col-span-1">
+                <div class="mat-field-label">Nơi nhập hàng<span class="font-bold text-red-500 text-lg">*</span> :</div>
+                <p-dropdown panelStyleClass="max-w-full" [style]="{ width: '100%'}" optionLabel="name" optionValue="id"
+                    name="truongdt" appendTo="body" [filter]="true" filterBy="name">
+                </p-dropdown>
+            </div>
+
+            <div class="flex justify-center flex-col gap-1">
+                <label htmlFor="username">Giá bán :</label>
+                <input class="w-full" pInputText id="username" [(ngModel)]="data.standardCost" />
+            </div>
+
+            <div class="flex flex-col justify-center">
+                <div class="flex justify-between mb-1">
+                    <label for="ngoaingu">Sản phẩm mới :</label>
+                    <p-checkbox class="mr-2" name="groupname" [binary]="true" inputId="ngoaingu"
+                        [(ngModel)]="data.isNew"></p-checkbox>
+                </div>
+                <div class="flex justify-between mb-1 pt-2">
+                    <label for="ngoaingu">Sản phẩm đặc biệt :</label>
+                    <p-checkbox class="mr-2" name="groupname" [binary]="true" inputId="ngoaingu"
+                        [(ngModel)]="data.isSpecial"></p-checkbox>
+                </div>
+            </div>
+
+            <div class="flex flex-col justify-center sm:col-span-2">
+                <div class="mat-field-label">Văn bằng đính kèm :</div>
+                <p-fileUpload #fileForm accept="image/*,.doc,.docx,.pdf,.xls,.xlsx" class="w-full text-base"
+                    multiple="multiple" chooseLabel="Chọn" cancelLabel="Hủy" [customUpload]="true"
+                    maxFileSize="102400000" (onSelect)="myUploader($event, fileForm)">
+                    <ng-template pTemplate="content">
+                        <ul *ngIf="data.fileList" >
+                            <div *ngFor="let file of data.fileList">
+                                <div *ngIf="!file.isdeleted" class="flex items-center justify-between w-full md:w-auto mt-2">
+                                    <div class="fuse-mat-no-subscript w-2/5">
+                                        <div class="mat-field-label truncate ">{{file.fileName}}</div>
+                                    </div>
+
+                                    <div class="fuse-mat-no-subscript w-1/5">
+                                        <div class="mat-field-label ">{{file.fileSize}} bytes</div>
+                                    </div>
+
+                                    <div class="flex justify-end w-1/5">
+                                        <!-- <p-button icon="pi pi-times" (click)></p-button> -->
+                                        <button pButton icon="fa-light fa-trash-can" type="button"
+                                            (click)="deleteFile(file)"></button>
+                                    </div>
+                                </div>
+                            </div>
+                        </ul>
+                    </ng-template>
+                    <ng-template let-file pTemplate="file">
+                        <div class="flex items-center justify-between w-full md:w-auto mt-2">
+                            <div class="fuse-mat-no-subscript w-2/5">
+                                <div class="mat-field-label truncate ">{{file.name}}</div>
+                            </div>
+
+                            <div class="fuse-mat-no-subscript w-1/5">
+                                <div class="mat-field-label ">{{file.size}} bytes</div>
+                            </div>
+
+                            <div class="flex justify-end w-1/5">
+                                <!-- <p-button icon="pi pi-times" (click)></p-button> -->
+                                <button pButton icon="pi pi-times" type="button"
+                                (click)="removeFile(file, fileForm, $event)"></button>
+                            </div>
+                        </div>
+                    </ng-template>
+                </p-fileUpload>
+            </div>
+        </div>
+    </div>
+
+    <div class="flex flex-0 items-center justify-end h-12 mr-2 pr-3 sm:pr-5 pl-6 sm:pl-8 mt-2 text-on-primary">
+        <div mat-dialog-actions class="h-toolbar flex justify-end pb-12">
+            <button class="mx-1 button-green" mat-flat-button (click)="saveAndClose()">
+                <i class="pi pi-check icon-size-5"></i>
+                <span class="ml-2">Cập nhật</span>
+            </button>
+            <button class="mx-1 button-red" mat-flat-button (click)="close()">
+                <i class="pi pi-times icon-size-5"></i>
+                <span class="ml-2">Đóng</span>
+            </button>
+        </div>
+    </div>
+</div>

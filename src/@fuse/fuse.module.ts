@@ -7,6 +7,8 @@ import { FuseMediaWatcherModule } from '@fuse/services/media-watcher/media-watch
 import { FusePlatformModule } from '@fuse/services/platform/platform.module';
 import { FuseSplashScreenModule } from '@fuse/services/splash-screen/splash-screen.module';
 import { FuseUtilsModule } from '@fuse/services/utils/utils.module';
+import { MessageBoxModule } from './components/message-box/message-box.module';
+import { MessageBox } from './components/message-box/message-box.provider';
 
 @NgModule({
     imports  : [
@@ -15,7 +17,8 @@ import { FuseUtilsModule } from '@fuse/services/utils/utils.module';
         FuseMediaWatcherModule,
         FusePlatformModule,
         FuseSplashScreenModule,
-        FuseUtilsModule
+        FuseUtilsModule,
+        MessageBoxModule
     ],
     providers: [
         {
@@ -33,7 +36,8 @@ import { FuseUtilsModule } from '@fuse/services/utils/utils.module';
             useValue: {
                 appearance: 'fill'
             }
-        }
+        },
+        MessageBox
     ]
 })
 export class FuseModule

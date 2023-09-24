@@ -1,0 +1,69 @@
+<div class="absolute inset-0 flex flex-col min-w-0 overflow-hidden">
+
+    <!-- Main -->
+    <div class="flex flex-auto overflow-hidden">
+        <div class="flex flex-col flex-auto min-w-0">
+
+            <!-- Header -->
+            <div
+                class="flex flex-col sm:flex-row flex-0 sm:items-center sm:justify-between p-6 sm:py-8 sm:px-10 border-b bg-card dark:bg-transparent">
+                <div class="flex-1 min-w-0">
+                    <!-- Title -->
+                    <div class="mt-2">
+                        <h2 class="text-3xl md:text-4xl font-extrabold tracking-tight leading-7 sm:leading-10 truncate">
+                            Quản lí file
+                        </h2>
+                    </div>
+                </div>
+                <!-- Actions -->
+                <div class="flex shrink-0 items-center mt-6 sm:mt-0 sm:ml-4">
+                </div>
+            </div>
+
+            <!-- Main -->
+            <div #main class="flex-auto sm:p-2 shadow bg-white">
+                <p-table [value]="files" [tableStyle]="{ width: '100%' }" scrollHeight="{{main.offsetHeight-120}}px"
+                responsiveLayout="scroll" [scrollable]="true">
+                    <ng-template pTemplate="caption">
+                        <div class="flex items-center justify-between">
+                            <div class="p-inputgroup w-100">
+                                <button type="button" pButton label="Search" (click)="findFileByContext()"></button>
+                                <input type="text" pInputText placeholder="Keyword" [(ngModel)]="wordFinding"/>
+                            </div>
+                            <!-- <p-fileUpload mode="basic" name="demo[]" accept=".doc,.docx,.pdf"
+                                (onSelect)="myUploader($event, fileForm)" [auto]="false" chooseLabel="Browse"
+                                (uploadHandler)="upload($event)" customUpload="true" [auto]="true"></p-fileUpload> -->
+                            <p-fileUpload #fileForm accept=".pdf" chooseLabel="Browse" chooseStyleClass="text-white"
+                                cancelLabel="Hủy" maxFileSize="512000" (onSelect)="upload($event, fileForm)" mode="basic" [auto]="true">
+                            </p-fileUpload>
+                        </div>
+                    </ng-template>
+                    <ng-template pTemplate="header" let-columns>
+                        <tr>
+                            <th class="text-center" style="width: 10%">STT</th>
+                            <th class="text-center" style="width: 40%">Tên file</th>
+                            <th class="text-center" style="width: 10%">Loại file</th>
+                            <th class="text-center" style="width: 20%">Kích thước</th>
+                            <th class="text-center" style="width: 20%">Thao tác</th>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="body" let-product let-columns="columns" let-i="rowIndex">
+                        <tr>
+                            <td class="text-center" style="width: 10%">{{i+1}}</td>
+                            <td class="text-center" style="width: 40%">{{product.fileName}}</td>
+                            <td class="text-center" style="width: 10%">{{product.fileExtend}}</td>
+                            <td class="text-center" style="width: 20%">{{product.fileSize}}</td>
+                            <td class="text-center" style="width: 20%">
+                                <p-button icon="pi pi-eye" styleClass="p-button-text mr-2" (onClick)="viewFile(product)"></p-button>
+                                <p-button icon="pi pi-download" styleClass="p-button-text mr-2" (onClick)="download(product)"></p-button>
+                                <p-button icon="pi pi-trash" styleClass="p-button-text" (onClick)="delete(product.id)"></p-button>
+                            </td>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="summary">
+                        <span *ngIf="files == null || files.length == 0">Không có dữ liệu</span>
+                    </ng-template>
+                </p-table>
+            </div>
+        </div>
+    </div>

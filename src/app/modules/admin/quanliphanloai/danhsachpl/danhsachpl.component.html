@@ -1,0 +1,75 @@
+<div class="flex flex-col flex-auto min-w-0">
+
+    <!-- Header -->
+    <div class="flex flex-col sm:flex-row flex-0 sm:items-center sm:justify-between p-6 sm:py-8 sm:px-10 border-b bg-card dark:bg-transparent">
+        <div class="flex-1 min-w-0">
+            <!-- Breadcrumbs -->
+            <div class="flex flex-wrap items-center font-medium">
+                <div>
+                    <a class="whitespace-nowrap text-primary-500">Documentation</a>
+                </div>
+                <div class="flex items-center ml-1 whitespace-nowrap">
+                    <mat-icon
+                        class="icon-size-5 text-secondary"
+                        [svgIcon]="'heroicons_solid:chevron-right'"></mat-icon>
+                    <a class="ml-1 text-primary-500">Fuse Components</a>
+                </div>
+                <div class="flex items-center ml-1 whitespace-nowrap">
+                    <mat-icon
+                        class="icon-size-5 text-secondary"
+                        [svgIcon]="'heroicons_solid:chevron-right'"></mat-icon>
+                    <span class="ml-1 text-secondary">Libraries</span>
+                </div>
+            </div>
+            <!-- Title -->
+            <div class="mt-2">
+                <h2 class="text-3xl md:text-4xl font-extrabold tracking-tight leading-7 sm:leading-10 truncate">
+                    Angular Material Components
+                </h2>
+            </div>
+        </div>
+        <!-- Actions -->
+        <div class="flex shrink-0 items-center mt-6 sm:mt-0 sm:ml-4">
+        </div>
+    </div>
+
+    <!-- Main -->
+    <div class="flex-auto sm:p-2 shadow bg-card bg-gray-100">
+
+        <div class="max-w-4xl prose prose-sm">
+
+        </div>
+
+        <div class="border-1 w-panel border-gray-300 rounded bg-white p-4 h-full">
+            <div class="flex align-items-center mb-2">
+                <p-button icon="pi pi-refresh" class="mr-2"></p-button>
+                <p-button icon="pi pi-plus" (onClick)="add()"></p-button>
+            </div>
+
+            <p-treeTable [value]="category" [tableStyle]="{'min-width': '60rem'}" [style]="{width: '100%'}">
+                <ng-template pTemplate="header">
+                    <tr>
+                        <th style="width: 10%">Mã</th>
+                        <th style="width: 10%">Tên</th>
+                        <th style="width: 20%">Image</th>
+                        <th style="width: 10%">Mô tả</th>
+                        <th style="width: 20%">Trạng thái</th>
+                        <th style="width: 20%">Thao tác</th>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-rowNode let-rowData="rowData">
+                    <tr [ttRow]="rowNode">
+                        <td>
+                            <p-treeTableToggler [rowNode]="rowNode"></p-treeTableToggler>
+                            {{ rowData.name }}
+                        </td>
+                        <td>{{ rowData.size }}</td>
+                        <td>{{ rowData.type }}</td>
+                    </tr>
+                </ng-template>
+            </p-treeTable>
+        </div>
+
+    </div>
+
+</div>

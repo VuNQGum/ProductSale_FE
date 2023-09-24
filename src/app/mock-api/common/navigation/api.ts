@@ -1,24 +1,33 @@
-import { Injectable } from '@angular/core';
+import { Injectable, OnInit } from '@angular/core';
 import { cloneDeep } from 'lodash-es';
 import { FuseNavigationItem } from '@fuse/components/navigation';
 import { FuseMockApiService } from '@fuse/lib/mock-api';
-import { compactNavigation, defaultNavigation, futuristicNavigation, horizontalNavigation } from 'app/mock-api/common/navigation/data';
+import { compactNavigationByRoleQuanLy, defaultNavigation } from 'app/mock-api/common/navigation/data';
+import { User } from 'app/core/user/user.types';
+import { UserService } from 'app/core/user/user.service';
+import { ReplaySubject, Subject, takeUntil } from 'rxjs';
+import { Navigation } from '@angular/router';
 
 @Injectable({
     providedIn: 'root'
 })
-export class NavigationMockApi
-{
-    private readonly _compactNavigation: FuseNavigationItem[] = compactNavigation;
-    private readonly _defaultNavigation: FuseNavigationItem[] = defaultNavigation;
-    private readonly _futuristicNavigation: FuseNavigationItem[] = futuristicNavigation;
-    private readonly _horizontalNavigation: FuseNavigationItem[] = horizontalNavigation;
-
+export class NavigationMockApi {
+    private _navigation: ReplaySubject<Navigation> = new ReplaySubject<Navigation>(1);
+    private _menuAll: FuseNavigationItem[] = [];
+    private _unsubscribeAll: Subject<any> = new Subject<any>();
+    user: User;
     /**
      * Constructor
      */
-    constructor(private _fuseMockApiService: FuseMockApiService)
-    {
+    constructor(
+        private _fuseMockApiService: FuseMockApiService,
+        private _userService: UserService
+    ) {
+        this._userService.user$
+            .pipe((takeUntil(this._unsubscribeAll)))
+            .subscribe((user: User) => {
+                this.user = user;
+            });
         // Register Mock API handlers
         this.registerHandlers();
     }
@@ -30,53 +39,41 @@ export class NavigationMockApi
     /**
      * Register Mock API handlers
      */
-    registerHandlers(): void
-    {
+    registerHandlers(): void {
         // -----------------------------------------------------------------------------------------------------
         // @ Navigation - GET
         // -----------------------------------------------------------------------------------------------------
         this._fuseMockApiService
-            .onGet('api/common/navigation')
-            .reply(() => {
-
-                // Fill compact navigation children using the default navigation
-                this._compactNavigation.forEach((compactNavItem) => {
-                    this._defaultNavigation.forEach((defaultNavItem) => {
-                        if ( defaultNavItem.id === compactNavItem.id )
-                        {
-                            compactNavItem.children = cloneDeep(defaultNavItem.children);
-                        }
-                    });
+        .onGet('api/common/navigation')
+        .reply(() => {
+                this._userService.user$
+                .pipe((takeUntil(this._unsubscribeAll)))
+                .subscribe((user: User) => {
+                    this.user = user;
                 });
-
-                // Fill futuristic navigation children using the default navigation
-                this._futuristicNavigation.forEach((futuristicNavItem) => {
-                    this._defaultNavigation.forEach((defaultNavItem) => {
-                        if ( defaultNavItem.id === futuristicNavItem.id )
-                        {
-                            futuristicNavItem.children = cloneDeep(defaultNavItem.children);
-                        }
-                    });
+                this._menuAll = []
+                defaultNavigation.forEach(element => {
+                    this._menuAll.push(element)
                 });
-
-                // Fill horizontal navigation children using the default navigation
-                this._horizontalNavigation.forEach((horizontalNavItem) => {
-                    this._defaultNavigation.forEach((defaultNavItem) => {
-                        if ( defaultNavItem.id === horizontalNavItem.id )
-                        {
-                            horizontalNavItem.children = cloneDeep(defaultNavItem.children);
-                        }
-                    });
-                });
-
+                if (this.user) {
+                    const roleQuanly = this.user.roles.find((item: any) => item === 'QUANLY');
+                    const roleThuKho = this.user.roles.find((item: any) => item === 'THUKHO');
+                    const roleNhanVien = this.user.roles.find((item: any) => item === 'NHANVIEN');
+                    const roleKhachHang = this.user.roles.find((item: any) => item === 'KHACHHANG');
+                    if (roleQuanly) {
+                        this._menuAll.push(compactNavigationByRoleQuanLy[0])
+                        this._menuAll.push(compactNavigationByRoleQuanLy[1])
+                        this._menuAll.push(compactNavigationByRoleQuanLy[2])
+                    }
+                }
                 // Return the response
                 return [
                     200,
                     {
-                        compact   : cloneDeep(this._compactNavigation),
-                        default   : cloneDeep(this._defaultNavigation),
-                        futuristic: cloneDeep(this._futuristicNavigation),
-                        horizontal: cloneDeep(this._horizontalNavigation)
+                        horizontal: this._menuAll,
+                        futuristic: [],
+                        default: this._menuAll,
+                        compact: []
                     }
                 ];
             });

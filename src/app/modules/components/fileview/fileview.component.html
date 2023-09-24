@@ -1,0 +1,39 @@
+<div class="flex flex-col max-w-310 md:min-w-310 overflow-hidden max-h-screen -m-6">
+    <!-- Header -->
+    <div class="flex flex-0 items-center justify-between h-12 pr-3 sm:pr-5 pl-6 sm:pl-8 bg-primary text-on-primary">
+        <div class="text-lg font-medium head-modal">Xem file</div>
+        <div class="split-button items-center">
+            <i class="fa-light fa-paperclip icon-size-5 ml-1"></i>
+            <button matTooltip="File đính kèm" mat-raised-button color="primary" class="split-button-left">
+                <ng-container class="file-name">
+                    {{ data.fileName }}
+                </ng-container>
+                <i class="fa-light fa-download icon-size-5 ml-1 mr-1 cursor-pointer" matTooltip="Tải về"
+                    (click)="downloadAttachmentFile()"></i>
+            </button>
+        </div>
+        <button mat-icon-button [tabIndex]="-1" (click)="close()">
+            <i class="fa-light fa-xmark icon-size-5"></i>
+        </button>
+    </div>
+
+    <div class="h-full overflow-auto" style="height: 90vh !important">
+        <ngx-extended-pdf-viewer *ngIf="is_Pdf" [logLevel]="0" [src]="filePreview" [showSidebarButton]="false"
+            [showFindButton]="false" showUnverifiedSignatures="true" [showPagingButtons]="true" [showZoomButtons]="true"
+            [handTool]="false" [showPresentationModeButton]="true" [showOpenFileButton]="false"
+            [showPrintButton]="false" [showDownloadButton]="true" [showBookmarkButton]="false"
+            [showSecondaryToolbarButton]="true" [showRotateButton]="false" [showHandToolButton]="false"
+            [showScrollingButton]="false" showUnverifiedSignatures="true" [showSpreadButton]="false"
+            [showPropertiesButton]="true" language="vi" fusePerfectScrollbar>
+        </ngx-extended-pdf-viewer>
+        <div class="flex items-center justify-center">
+            <!-- <app-imageview *ngIf="is_Image" [source]="filePreview" [type]="'base64'" [width]="'600'"
+            [height]="'800'"></app-imageview> -->
+            <p-image *ngIf="is_Image" [src]="filePreview" alt="Image" imageClass="max-w-full h-auto"
+                styleClass="border-2 p-1" [preview]="true"></p-image>
+        </div>
+        <ngx-doc-viewer *ngIf="is_Doc" [url]="data.fileUrl" viewer="google" style="width:100%;height:100%;"></ngx-doc-viewer>
+        <p *ngIf="!is_Pdf && !is_Image && !is_Doc">Không hỗ trợ hiển thị định dạng file {{data.fileExten}}</p>
+    </div>
+
+</div>

@@ -2,3 +2,91 @@
 /*  @ Import/write your custom styles here.
 /*  @ Styles from this file will override 'vendors.scss' and Fuse's base styles.
 /* ----------------------------------------------------------------------------------------------------- */
+@import "primeng/resources/themes/lara-light-blue/theme.css";
+@import "primeng/resources/primeng.css";
+@import "primeicons/primeicons.css";
+
+
+/* ----------------------------------------------------------------------------------------------------- */
+/*  @ primeng
+/* ----------------------------------------------------------------------------------------------------- */
+
+@media only screen and (min-width: 960px) {
+
+    /* styles for browsers larger than 960px; */
+    .w-panel,.w-panel-big {
+        margin-left: auto;
+        margin-right: auto;
+        width: 100% !important;
+        max-width: 100% !important;
+    }
+}
+
+@media only screen and (min-width: 1440px) {
+
+    /* styles for browsers larger than 1440px; */
+    .w-panel {
+        margin-left: auto;
+        margin-right: auto;
+        width:90% !important;
+        max-width: 90% !important;
+    }
+    .w-panel-big {
+        margin-left: auto;
+        margin-right: auto;
+        width: 100% !important;
+        max-width: 100% !important;
+    }
+}
+
+@media only screen and (min-width: 2000px) {
+    .w-panel {
+        margin-left: auto;
+        margin-right: auto;
+        width: 80% !important;
+        max-width: 80% !important;
+    }
+    .w-panel-big {
+        margin-left: auto;
+        margin-right: auto;
+        width: 90% !important;
+        max-width: 90% !important;
+    }
+}
+
+@media only screen and (max-device-width: 480px) {
+    .w-panel,.w-panel-big {
+        margin-left: auto;
+        margin-right: auto;
+        width: 100% !important;
+        max-width: 100% !important;
+    }
+}
+
+@media only screen and (device-width: 768px) {
+    .w-panel,.w-panel-big {
+        margin-left: auto;
+        margin-right: auto;
+        width: 100% !important;
+        max-width: 100% !important;
+    }
+}
+
+/* different techniques for iPad screening */
+@media only screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation:portrait) {
+    .w-panel,.w-panel-big {
+        margin-left: auto;
+        margin-right: auto;
+        width: 100% !important;
+        max-width: 100% !important;
+    }
+}
+
+@media only screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation:landscape) {
+    .w-panel,.w-panel-big {
+        margin-left: auto;
+        margin-right: auto;
+        width: 100% !important;
+        max-width: 100% !important;
+    }
+}

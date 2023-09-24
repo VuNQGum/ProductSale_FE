@@ -44,6 +44,7 @@ export class AuthService {
         return localStorage.getItem('refreshToken') ?? '';
     }
 
+
     // -----------------------------------------------------------------------------------------------------
     // @ Public methods
     // -----------------------------------------------------------------------------------------------------
@@ -79,21 +80,24 @@ export class AuthService {
 
         return this._httpClient.post(API.BE + '/api/auth/sign-in', credentials).pipe(
             switchMap((response: any) => {
+                if (response.state == false) return of(false)
+                else {
 
-                // Store the access token in the local storage
-                this.accessToken = response.token;
+                    // Store the access token in the local storage
+                    this.accessToken = response.token;
 
-                // Store therefresh Token in the local storage
-                this.refreshToken = response.refreshToken;
+                    // Store therefresh Token in the local storage
+                    this.refreshToken = response.refreshToken;
 
-                // Set the authenticated flag to true
-                this._authenticated = true;
+                    // Set the authenticated flag to true
+                    this._authenticated = true;
 
-                // Store the user on the user service
-                this._userService.user = response.userInfo;
+                    // Store the user on the user service
+                    this._userService.user = response.userInfo;
 
-                // Return a new observable with the response
-                return of(response);
+                    // Return a new observable with the response
+                    return of(response.state);
+                }
             })
         );
     }
@@ -163,8 +167,8 @@ export class AuthService {
      *
      * @param user
      */
-    signUp(user: { name: string; email: string; password: string; company: string }): Observable<any> {
-        return this._httpClient.post('api/auth/sign-up', user);
+    signUp(user: { username: string; name: string; email: string; password: string}): Observable<any> {
+        return this._httpClient.post(API.BE + 'api/auth/sign-up', user);
     }
 
     /**

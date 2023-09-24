@@ -158,7 +158,6 @@ export class AuthUtils
         {
             return null;
         }
-        console.log(token);
 
         // Split the token
         const parts = token.split('.');

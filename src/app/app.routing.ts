@@ -57,7 +57,10 @@ export const appRoutes: Route[] = [
         path: '',
         component  : LayoutComponent,
         data: {
-            layout: 'empty'
+            layout: 'modern'
+        },
+        resolve    : {
+            initialData: InitialDataResolver,
         },
         children   : [
             {path: 'home', loadChildren: () => import('app/modules/landing/home/home.module').then(m => m.LandingHomeModule)},
@@ -66,15 +69,31 @@ export const appRoutes: Route[] = [
 
     // Admin routes
     {
-        path       : '',
+        path       : 'admin',
         canActivate: [AuthGuard],
         canActivateChild: [AuthGuard],
         component  : LayoutComponent,
         resolve    : {
             initialData: InitialDataResolver,
         },
+        data: {
+            layout: 'classy'
+        },
         children   : [
-            {path: 'example', loadChildren: () => import('app/modules/admin/example/example.module').then(m => m.ExampleModule)},
+            // Quan li san pham
+            {path: 'product', children: [
+                {path: 'danhsach', loadChildren: () => import('app/modules/admin/quanlisp/quanlisp.module').then(m => m.QuanlispModule)},
+                {path: 'phanloai', loadChildren: () => import('app/modules/admin/quanliphanloai/quanliphanloai.module').then(m => m.QuanliphanloaiModule)},
+            ]},
+
+            // Quan li nhan vien
+            {path: 'employee', children: [
+                {path: 'danhsach', loadChildren: () => import('app/modules/admin/example/example.module').then(m => m.ExampleModule)},
+            ]},
+
+            {path: 'file', children: [
+                {path: 'quanli', loadChildren: () => import('app/modules/admin/file/file.module').then(m => m.FileModule)},
+            ]},
         ]
     }
 ];
